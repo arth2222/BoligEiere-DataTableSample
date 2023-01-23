@@ -62,5 +62,55 @@ namespace DataTableSample
             }
             return dt;
         }
+
+        /// <summary>
+        /// Returnerer alt i eiertabellen. 
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAllEier()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["BoligEier"].ConnectionString;
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Eier", conn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                dt.Load(reader);
+
+                reader.Close();
+                conn.Close();
+            }
+            return dt;
+        }
+
+        /// <summary>
+        /// Alt fra Postnummertabellen
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAllPostNummer()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["BoligEier"].ConnectionString;
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM PostNummer", conn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                dt.Load(reader);
+
+                reader.Close();
+                conn.Close();
+            }
+            return dt;
+        }
     }
 }

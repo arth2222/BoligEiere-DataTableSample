@@ -66,11 +66,13 @@ namespace DataTableSample
                                {
                                    PostNummer = row["PostNummer"].ToString(),
                                    PostSted = row["PostSted"].ToString()
-                               }).ToList();
+                               }).ToList();//denne gjør om alt til en liste av anonymous types
             //todo
             //nok en liste som over med eiere
-            //bruke linq til å joine
+            //bruke linq til å joine, slik at vi får ut alle eiere, pluss stedsnavn fra postnummer tabellen
             //koble de til GridViewen under.
+
+            //litt eksempelkode
 
             //List<ObjectA> listOfA = ...;
             //List<ObjectB> listOfB = ...;

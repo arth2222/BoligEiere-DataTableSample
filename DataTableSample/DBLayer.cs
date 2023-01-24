@@ -38,6 +38,35 @@ namespace DataTableSample
             return dt; //hele datasettet returneres. skal da kobles til feks en gridview
         }
 
+        public void InsertPostNummer(string postNummer, string postSted)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["BoligEier"].ConnectionString;
+            DataTable dt = new DataTable();
+            SqlParameter param;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                //den samme sql queryen her som dere allerede har testet i sql manager - her med et parameter, som er telefonnummeret
+                SqlCommand cmd = new SqlCommand("INSERT INTO PostNummer (PostNummer,PostSted) VALUES (@pn,@ps)", conn);
+                cmd.CommandType = CommandType.Text;
+
+                //params here
+                param = new SqlParameter("@pn", SqlDbType.NChar);
+                param.Value = postNummer; 
+                cmd.Parameters.Add(param);
+
+                param = new SqlParameter("@ps", SqlDbType.NVarChar);
+                param.Value = postSted;
+                cmd.Parameters.Add(param);
+
+                try { cmd.ExecuteNonQuery(); } 
+                catch { }    
+
+                conn.Close();
+            }
+        }
+
         /// <summary>
         /// Returnerer alt fra tabellen boliger. Ikke hensiktsmessig om det er mange boliger.
         /// </summary>

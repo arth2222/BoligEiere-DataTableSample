@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace DataTableSample
 {
@@ -14,8 +15,12 @@ namespace DataTableSample
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            DBLayer layer = new DBLayer();
             LabelNumBoliger.Text = GetNumOfBoliger().ToString();//hvorfor ToString her?
-            ShowEiereWithPostStedUsingLINQ();//tester ut datatable og linq
+            //ShowEiereWithPostStedUsingLINQ();//tester ut datatable og linq
+
+           
+
         }
 
         /// <summary>
@@ -68,7 +73,7 @@ namespace DataTableSample
                                    PostSted = row["PostSted"].ToString()
                                }).ToList();//denne gjør om alt til en liste av anonymous types
             //todo
-            //nok en liste som over med eiere
+            //nok en liste, som over, med eiere
             //bruke linq til å joine, slik at vi får ut alle eiere, pluss stedsnavn fra postnummer tabellen
             //koble de til GridViewen under.
 
@@ -89,6 +94,8 @@ namespace DataTableSample
 
             //GridViewBoligEiere.DataSource = <dinListe>;
             //GridViewBoligEiere.DataBind();
+
+            //*************  om dere fikk taket på den over, hva med å koble sammen 3 lister slik at vi får ut boliger og hvem den eies av
         }
 
 
